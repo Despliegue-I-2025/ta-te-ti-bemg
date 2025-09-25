@@ -1,7 +1,7 @@
 import express from 'express';
 import algoritmo from './algoritmo.js';
 const app = express();
-const PORT = 3000;
+const PORT = 3009;
 
 // GET /move?board=[0,1,0,2,0,0,0,0,0]
 app.get('/move', (req, res) => {
