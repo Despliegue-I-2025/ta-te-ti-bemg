@@ -208,4 +208,12 @@ function verificarGanador(board, simbolo) {
   );
 }
 
+// Exportar funciones internas para testing
+export {
+  buscarMovimientoGanador,
+  buscarMovimientoCompletar,
+  estrategiaPosicional,
+  verificarGanador
+};
+
 export default algoritmo;
