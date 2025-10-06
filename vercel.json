@@ -13,15 +13,12 @@
       "dest": "app/server.js"
     }
   ],
+  "functions": {
+    "app/server.js": {
+      "maxDuration": 10
+    }
+  },
   "env": {
-    "NODE_ENV": "production",
-    "PORT": "3009",
-    "API_VERSION": "v1",
-    "API_PREFIX": "/api",
-    "LOG_LEVEL": "info",
-    "COVERAGE_THRESHOLD_STATEMENTS": "88",
-    "COVERAGE_THRESHOLD_BRANCHES": "77",
-    "COVERAGE_THRESHOLD_FUNCTIONS": "90",
-    "COVERAGE_THRESHOLD_LINES": "89"
+    "NODE_ENV": "production"
   }
 }

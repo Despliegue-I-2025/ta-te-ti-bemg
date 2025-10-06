@@ -17,6 +17,23 @@ const PORT = process.env.PORT || 3009
 // Middleware
 app.use(express.json())
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Ta-Te-Ti BEMG API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      move: '/move?board=[0,1,0,2,0,0,0,0,0]',
+      movePost: 'POST /move'
+    },
+    examples: {
+      '3x3': '/move?board=[0,1,0,2,0,0,0,0,0]',
+      '5x5': '/move?board=[0,1,0,2,0,0,0,0,0,0,1,0,2,0,0,0,0,0,0,1,0,2,0,0,0]'
+    }
+  })
+})
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({
