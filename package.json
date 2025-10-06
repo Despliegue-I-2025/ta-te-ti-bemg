@@ -1,0 +1,19 @@
+{
+  "name": "tateti-bemg",
+  "version": "1.0.0",
+  "main": "app/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app/server.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^30.1.3",
+    "supertest": "^7.1.4"
+  }
+}
