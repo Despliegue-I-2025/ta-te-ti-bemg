@@ -52,7 +52,7 @@ const COMBINACIONES_GANADOR = [
   [11, 17, 23] // Más diagonales menores
 ]
 
-function algoritmoCinco (board, emptyPositions) {
+function algoritmoCinco(board, emptyPositions) {
   const vacias = emptyPositions.length
   const somosX = vacias % 2 === 1
   const miSimbolo = somosX ? 1 : 2
@@ -199,7 +199,7 @@ function algoritmoCinco (board, emptyPositions) {
   return posicionesVacias[0]
 }
 
-function buscarMovimientoGanador (board, posicionesVacias, simbolo) {
+function buscarMovimientoGanador(board, posicionesVacias, simbolo) {
   for (const posicion of posicionesVacias) {
     const tableroPrueba = [...board]
     tableroPrueba[posicion] = simbolo
@@ -210,7 +210,7 @@ function buscarMovimientoGanador (board, posicionesVacias, simbolo) {
   return null
 }
 
-function buscarMovimientoCompletar (board, posicionesVacias, simbolo) {
+function buscarMovimientoCompletar(board, posicionesVacias, simbolo) {
   for (const combinacion of COMBINACIONES_GANADOR) {
     const posicionesCombinacion = combinacion.filter(
       pos => board[pos] === simbolo
@@ -229,7 +229,7 @@ function buscarMovimientoCompletar (board, posicionesVacias, simbolo) {
   return null
 }
 
-function estrategiaPosicional (posicionesVacias) {
+function estrategiaPosicional(posicionesVacias) {
   const centro = 12
   if (posicionesVacias.includes(centro)) {
     return centro
@@ -250,7 +250,7 @@ function estrategiaPosicional (posicionesVacias) {
   return posicionesVacias[0]
 }
 
-function verificarGanador (board, simbolo) {
+function verificarGanador(board, simbolo) {
   return COMBINACIONES_GANADOR.some(combinacion =>
     combinacion.every(posicion => board[posicion] === simbolo)
   )

@@ -6,7 +6,7 @@ module.exports = {
     node: true,
     jest: true
   },
-  extends: ['standard'],
+  extends: ['standard', 'prettier'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
@@ -18,7 +18,9 @@ module.exports = {
     'prefer-const': 'error',
     'no-var': 'error',
     'object-shorthand': 'error',
-    'prefer-template': 'error'
+    'prefer-template': 'error',
+    // Disable conflicting rules that Prettier handles
+    'space-before-function-paren': 'off'
   },
   ignorePatterns: ['node_modules/', 'coverage/', 'dist/', '*.min.js']
 }

@@ -8,7 +8,7 @@ import { SYMBOLS } from './config.js'
  * @param {number} emptyCount - Number of empty positions on the board
  * @returns {Object} Object with miSimbolo and simboloOponente
  */
-export function determinePlayerSymbols (emptyCount) {
+export function determinePlayerSymbols(emptyCount) {
   const somosX = emptyCount % 2 === 1
   return {
     miSimbolo: somosX ? SYMBOLS.X : SYMBOLS.O,
@@ -24,7 +24,7 @@ export function determinePlayerSymbols (emptyCount) {
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {boolean} True if the move wins
  */
-export function evaluateWinningMove (
+export function evaluateWinningMove(
   board,
   position,
   symbol,
@@ -46,7 +46,7 @@ export function evaluateWinningMove (
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {number|null} Position of winning move or null if none
  */
-export function findImmediateWin (
+export function findImmediateWin(
   board,
   emptyPositions,
   symbol,
@@ -68,7 +68,7 @@ export function findImmediateWin (
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {number|null} Position of blocking move or null if none
  */
-export function findImmediateBlock (
+export function findImmediateBlock(
   board,
   emptyPositions,
   opponentSymbol,
@@ -90,7 +90,7 @@ export function findImmediateBlock (
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {number|null} Position of completion move or null if none
  */
-export function findStrategicCompletion (
+export function findStrategicCompletion(
   board,
   emptyPositions,
   symbol,
@@ -122,7 +122,7 @@ export function findStrategicCompletion (
  * @param {Object} config - Board configuration with center, corners, edges
  * @returns {number} Best available position
  */
-export function selectPositionalMove (emptyPositions, config) {
+export function selectPositionalMove(emptyPositions, config) {
   // Priority 1: Center
   if (emptyPositions.includes(config.center)) {
     return config.center
@@ -154,7 +154,7 @@ export function selectPositionalMove (emptyPositions, config) {
  * @param {number} opponentSymbol - Opponent symbol
  * @returns {Array} Array of opponent positions
  */
-export function getOpponentPositions (board, opponentSymbol) {
+export function getOpponentPositions(board, opponentSymbol) {
   return board
     .map((cell, index) => (cell === opponentSymbol ? index : null))
     .filter(i => i !== null)
@@ -167,7 +167,7 @@ export function getOpponentPositions (board, opponentSymbol) {
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {boolean} True if player has won
  */
-export function verifyWinner (board, symbol, winningCombinations) {
+export function verifyWinner(board, symbol, winningCombinations) {
   return winningCombinations.some(combinacion =>
     combinacion.every(posicion => board[posicion] === symbol)
   )
@@ -178,7 +178,7 @@ export function verifyWinner (board, symbol, winningCombinations) {
  * @param {number} boardLength - Length of board array
  * @returns {number} Board size (3 for 3x3, 5 for 5x5)
  */
-export function getBoardSize (boardLength) {
+export function getBoardSize(boardLength) {
   return Math.sqrt(boardLength)
 }
 
@@ -188,7 +188,7 @@ export function getBoardSize (boardLength) {
  * @param {number} boardSize - Size of board (3 or 5)
  * @returns {Object} Object with row and column
  */
-export function getRowColumn (position, boardSize) {
+export function getRowColumn(position, boardSize) {
   return {
     row: Math.floor(position / boardSize),
     column: position % boardSize
@@ -202,6 +202,6 @@ export function getRowColumn (position, boardSize) {
  * @param {number} boardSize - Size of board (3 or 5)
  * @returns {number} Board position
  */
-export function getPosition (row, column, boardSize) {
+export function getPosition(row, column, boardSize) {
   return row * boardSize + column
 }

@@ -13,7 +13,7 @@ import { BOARD_CONFIGS } from './config.js'
 
 const CONFIG = BOARD_CONFIGS.TRES
 
-function algoritmoTres (board, emptyPositions) {
+function algoritmoTres(board, emptyPositions) {
   const vacias = emptyPositions.length
   const { miSimbolo, simboloOponente } = determinePlayerSymbols(vacias)
   const posicionesVacias = emptyPositions

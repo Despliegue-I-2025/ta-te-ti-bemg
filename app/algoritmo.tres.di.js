@@ -20,7 +20,7 @@ const CONFIG = BOARD_CONFIGS.TRES
  * @param {Object} dependencies - Dependencias inyectadas (opcional)
  * @returns {number} - Posición del movimiento
  */
-function algoritmoTresRefactored (board, emptyPositions, dependencies = {}) {
+function algoritmoTresRefactored(board, emptyPositions, dependencies = {}) {
   const {
     config = CONFIG,
     buscarMovimientoGanadorFn = buscarMovimientoGanador,

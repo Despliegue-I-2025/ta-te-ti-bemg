@@ -21,7 +21,7 @@ const CONFIG = BOARD_CONFIGS.CINCO
  * @param {Object} dependencies - Dependencias inyectadas (opcional)
  * @returns {number} - Posición del movimiento
  */
-function algoritmoCincoRefactored (board, emptyPositions, dependencies = {}) {
+function algoritmoCincoRefactored(board, emptyPositions, dependencies = {}) {
   const {
     config = CONFIG,
     buscarMovimientoGanadorFn = findImmediateWin,
