@@ -24,7 +24,12 @@ describe('Algorithm Base Edge Cases', () => {
       const symbol = SYMBOLS.X
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = findStrategicCompletion(board, emptyPositions, symbol, winningCombinations)
+      const result = findStrategicCompletion(
+        board,
+        emptyPositions,
+        symbol,
+        winningCombinations
+      )
       expect(result).toBe(1) // Position 1 completes the row [0,1,2]
     })
 
@@ -34,7 +39,12 @@ describe('Algorithm Base Edge Cases', () => {
       const symbol = SYMBOLS.X
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = findStrategicCompletion(board, emptyPositions, symbol, winningCombinations)
+      const result = findStrategicCompletion(
+        board,
+        emptyPositions,
+        symbol,
+        winningCombinations
+      )
       expect(result).toBe(4) // Position 4 completes the diagonal [0,4,8]
     })
   })
@@ -170,7 +180,12 @@ describe('Algorithm Base Edge Cases', () => {
       const symbol = SYMBOLS.X
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = evaluateWinningMove(board, position, symbol, winningCombinations)
+      const result = evaluateWinningMove(
+        board,
+        position,
+        symbol,
+        winningCombinations
+      )
       expect(result).toBe(true)
     })
 
@@ -180,7 +195,12 @@ describe('Algorithm Base Edge Cases', () => {
       const symbol = SYMBOLS.X
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = evaluateWinningMove(board, position, symbol, winningCombinations)
+      const result = evaluateWinningMove(
+        board,
+        position,
+        symbol,
+        winningCombinations
+      )
       expect(result).toBe(false)
     })
   })
@@ -192,7 +212,12 @@ describe('Algorithm Base Edge Cases', () => {
       const symbol = SYMBOLS.X
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = findImmediateWin(board, emptyPositions, symbol, winningCombinations)
+      const result = findImmediateWin(
+        board,
+        emptyPositions,
+        symbol,
+        winningCombinations
+      )
       expect(result).toBe(2)
     })
 
@@ -202,7 +227,12 @@ describe('Algorithm Base Edge Cases', () => {
       const symbol = SYMBOLS.X
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = findImmediateWin(board, emptyPositions, symbol, winningCombinations)
+      const result = findImmediateWin(
+        board,
+        emptyPositions,
+        symbol,
+        winningCombinations
+      )
       expect(result).toBe(null)
     })
   })
@@ -214,7 +244,12 @@ describe('Algorithm Base Edge Cases', () => {
       const opponentSymbol = SYMBOLS.O
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = findImmediateBlock(board, emptyPositions, opponentSymbol, winningCombinations)
+      const result = findImmediateBlock(
+        board,
+        emptyPositions,
+        opponentSymbol,
+        winningCombinations
+      )
       expect(result).toBe(2)
     })
 
@@ -224,7 +259,12 @@ describe('Algorithm Base Edge Cases', () => {
       const opponentSymbol = SYMBOLS.O
       const winningCombinations = BOARD_CONFIGS.TRES.winningCombinations
 
-      const result = findImmediateBlock(board, emptyPositions, opponentSymbol, winningCombinations)
+      const result = findImmediateBlock(
+        board,
+        emptyPositions,
+        opponentSymbol,
+        winningCombinations
+      )
       expect(result).toBe(null)
     })
   })

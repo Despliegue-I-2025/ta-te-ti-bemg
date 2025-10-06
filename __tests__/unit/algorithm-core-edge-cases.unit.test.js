@@ -8,32 +8,56 @@ import { BOARD_CONFIGS, SYMBOLS } from '../../app/config.js'
 describe('Algorithm Core Edge Cases', () => {
   describe('algoritmo.cinco.core.js - Lines 75-83, 103, 109', () => {
     test('should handle strategic move when opponent in specific position (line 75-83)', () => {
-      const board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-      const emptyPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+      const board = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1
+      ]
+      const emptyPositions = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
       expect(emptyPositions).toContain(result)
     })
 
     test('should complete strategic combination (line 103)', () => {
-      const board = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
       expect(emptyPositions).toContain(result)
     })
 
     test('should block strategic combination (line 109)', () => {
-      const board = [2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
       expect(emptyPositions).toContain(result)
     })
 
     test('should handle dependency injection with custom strategic functions', () => {
-      const board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-      const emptyPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+      const board = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1
+      ]
+      const emptyPositions = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23
+      ]
 
       const customDependencies = {
         config: BOARD_CONFIGS.CINCO,
@@ -42,10 +66,17 @@ describe('Algorithm Core Edge Cases', () => {
         buscarMovimientoCompletarFn: () => null,
         estrategiaPosicionalFn: () => 12,
         obtenerPosicionesOponenteFn: () => [24],
-        determinarSimbolosFn: () => ({ miSimbolo: SYMBOLS.X, simboloOponente: SYMBOLS.O })
+        determinarSimbolosFn: () => ({
+          miSimbolo: SYMBOLS.X,
+          simboloOponente: SYMBOLS.O
+        })
       }
 
-      const result = algoritmoCincoCore(board, emptyPositions, customDependencies)
+      const result = algoritmoCincoCore(
+        board,
+        emptyPositions,
+        customDependencies
+      )
       expect(emptyPositions).toContain(result)
     })
   })
@@ -94,18 +125,31 @@ describe('Algorithm Core Edge Cases', () => {
         buscarMovimientoCompletarFn: () => null,
         estrategiaPosicionalFn: () => 4,
         obtenerPosicionesOponenteFn: () => [8],
-        determinarSimbolosFn: () => ({ miSimbolo: SYMBOLS.X, simboloOponente: SYMBOLS.O })
+        determinarSimbolosFn: () => ({
+          miSimbolo: SYMBOLS.X,
+          simboloOponente: SYMBOLS.O
+        })
       }
 
-      const result = algoritmoTresCore(board, emptyPositions, customDependencies)
+      const result = algoritmoTresCore(
+        board,
+        emptyPositions,
+        customDependencies
+      )
       expect(emptyPositions).toContain(result)
     })
   })
 
   describe('Complex Edge Cases', () => {
     test('should handle 5x5 board with complex strategic positioning', () => {
-      const board = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+      const board = [
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        2
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
       expect(emptyPositions).toContain(result)
@@ -120,7 +164,10 @@ describe('Algorithm Core Edge Cases', () => {
     })
 
     test('should handle almost full 5x5 board', () => {
-      const board = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+      const board = [
+        1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        0
+      ]
       const emptyPositions = [24]
 
       const result = algoritmoCincoCore(board, emptyPositions)
@@ -144,8 +191,14 @@ describe('Algorithm Core Edge Cases', () => {
     })
 
     test('should handle 5x5 board with multiple strategic opportunities', () => {
-      const board = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+      const board = [
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
       expect(emptyPositions).toContain(result)
@@ -154,8 +207,14 @@ describe('Algorithm Core Edge Cases', () => {
 
   describe('Dependency Injection Edge Cases', () => {
     test('should handle custom config in 5x5 algorithm', () => {
-      const board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24
+      ]
 
       const customConfig = {
         ...BOARD_CONFIGS.CINCO,
@@ -170,10 +229,17 @@ describe('Algorithm Core Edge Cases', () => {
         buscarMovimientoCompletarFn: () => null,
         estrategiaPosicionalFn: (emptyPos, config) => config.center,
         obtenerPosicionesOponenteFn: () => [],
-        determinarSimbolosFn: () => ({ miSimbolo: SYMBOLS.X, simboloOponente: SYMBOLS.O })
+        determinarSimbolosFn: () => ({
+          miSimbolo: SYMBOLS.X,
+          simboloOponente: SYMBOLS.O
+        })
       }
 
-      const result = algoritmoCincoCore(board, emptyPositions, customDependencies)
+      const result = algoritmoCincoCore(
+        board,
+        emptyPositions,
+        customDependencies
+      )
       expect(result).toBe(0) // Should return custom center
     })
 
@@ -194,10 +260,17 @@ describe('Algorithm Core Edge Cases', () => {
         buscarMovimientoCompletarFn: () => null,
         estrategiaPosicionalFn: (emptyPos, config) => config.center,
         obtenerPosicionesOponenteFn: () => [],
-        determinarSimbolosFn: () => ({ miSimbolo: SYMBOLS.X, simboloOponente: SYMBOLS.O })
+        determinarSimbolosFn: () => ({
+          miSimbolo: SYMBOLS.X,
+          simboloOponente: SYMBOLS.O
+        })
       }
 
-      const result = algoritmoTresCore(board, emptyPositions, customDependencies)
+      const result = algoritmoTresCore(
+        board,
+        emptyPositions,
+        customDependencies
+      )
       expect([0, 4]).toContain(result) // Should return custom center or default center
     })
   })

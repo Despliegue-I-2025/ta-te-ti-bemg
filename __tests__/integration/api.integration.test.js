@@ -120,7 +120,10 @@ describe('Integration Tests - API Endpoints', () => {
     })
 
     test('should handle almost full 5x5 board', async () => {
-      const board = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+      const board = [
+        1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        0
+      ]
       const response = await request(app)
         .post('/move')
         .send({ board })

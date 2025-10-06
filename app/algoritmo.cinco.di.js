@@ -1,26 +1,55 @@
 // Combinaciones Ganador para tablero 5x5 (Cg) - 3 en línea
 const COMBINACIONES_GANADOR = [
   // Filas horizontales (3 combinaciones por fila)
-  [0, 1, 2], [1, 2, 3], [2, 3, 4], // Fila 0
-  [5, 6, 7], [6, 7, 8], [7, 8, 9], // Fila 1
-  [10, 11, 12], [11, 12, 13], [12, 13, 14], // Fila 2
-  [15, 16, 17], [16, 17, 18], [17, 18, 19], // Fila 3
-  [20, 21, 22], [21, 22, 23], [22, 23, 24], // Fila 4
+  [0, 1, 2],
+  [1, 2, 3],
+  [2, 3, 4], // Fila 0
+  [5, 6, 7],
+  [6, 7, 8],
+  [7, 8, 9], // Fila 1
+  [10, 11, 12],
+  [11, 12, 13],
+  [12, 13, 14], // Fila 2
+  [15, 16, 17],
+  [16, 17, 18],
+  [17, 18, 19], // Fila 3
+  [20, 21, 22],
+  [21, 22, 23],
+  [22, 23, 24], // Fila 4
 
   // Columnas verticales (3 combinaciones por columna)
-  [0, 5, 10], [5, 10, 15], [10, 15, 20], // Columna 0
-  [1, 6, 11], [6, 11, 16], [11, 16, 21], // Columna 1
-  [2, 7, 12], [7, 12, 17], [12, 17, 22], // Columna 2
-  [3, 8, 13], [8, 13, 18], [13, 18, 23], // Columna 3
-  [4, 9, 14], [9, 14, 19], [14, 19, 24], // Columna 4
+  [0, 5, 10],
+  [5, 10, 15],
+  [10, 15, 20], // Columna 0
+  [1, 6, 11],
+  [6, 11, 16],
+  [11, 16, 21], // Columna 1
+  [2, 7, 12],
+  [7, 12, 17],
+  [12, 17, 22], // Columna 2
+  [3, 8, 13],
+  [8, 13, 18],
+  [13, 18, 23], // Columna 3
+  [4, 9, 14],
+  [9, 14, 19],
+  [14, 19, 24], // Columna 4
 
   // Diagonales principales (3 combinaciones)
-  [0, 6, 12], [6, 12, 18], [12, 18, 24], // Diagonal principal
-  [4, 8, 12], [8, 12, 16], [12, 16, 20], // Diagonal secundaria
+  [0, 6, 12],
+  [6, 12, 18],
+  [12, 18, 24], // Diagonal principal
+  [4, 8, 12],
+  [8, 12, 16],
+  [12, 16, 20], // Diagonal secundaria
 
   // Diagonales menores (6 combinaciones adicionales)
-  [2, 8, 14], [1, 7, 13], [7, 13, 19], // Diagonales menores
-  [3, 7, 11], [7, 11, 15], [5, 11, 17], [11, 17, 23] // Más diagonales menores
+  [2, 8, 14],
+  [1, 7, 13],
+  [7, 13, 19], // Diagonales menores
+  [3, 7, 11],
+  [7, 11, 15],
+  [5, 11, 17],
+  [11, 17, 23] // Más diagonales menores
 ]
 
 function algoritmoCinco (board, emptyPositions) {
@@ -71,7 +100,7 @@ function algoritmoCinco (board, emptyPositions) {
     // Estrategia posicional
     const posicionesO = board
       .map((cell, index) => (cell === simboloOponente ? index : null))
-      .filter((i) => i !== null)
+      .filter(i => i !== null)
     const posicionO = posicionesO[0]
 
     if ([0, 4, 20, 24].includes(posicionO)) {
@@ -90,13 +119,17 @@ function algoritmoCinco (board, emptyPositions) {
 
     if (posicionO === 12) {
       // O en centro - tomar esquina
-      const esquinas = [0, 4, 20, 24].filter((pos) =>
+      const esquinas = [0, 4, 20, 24].filter(pos =>
         posicionesVacias.includes(pos)
       )
       if (esquinas.length > 0) return esquinas[0]
     }
 
-    if ([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23].includes(posicionO)) {
+    if (
+      [
+        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+      ].includes(posicionO)
+    ) {
       // O en borde - bloquear fila/columna
       const fila = Math.floor(posicionO / 5)
       const columna = posicionO % 5
@@ -180,11 +213,11 @@ function buscarMovimientoGanador (board, posicionesVacias, simbolo) {
 function buscarMovimientoCompletar (board, posicionesVacias, simbolo) {
   for (const combinacion of COMBINACIONES_GANADOR) {
     const posicionesCombinacion = combinacion.filter(
-      (pos) => board[pos] === simbolo
+      pos => board[pos] === simbolo
     )
 
     if (posicionesCombinacion.length === 2) {
-      const posicionFaltante = combinacion.find((pos) => board[pos] === 0)
+      const posicionFaltante = combinacion.find(pos => board[pos] === 0)
       if (
         posicionFaltante !== undefined &&
         posicionesVacias.includes(posicionFaltante)
@@ -202,12 +235,14 @@ function estrategiaPosicional (posicionesVacias) {
     return centro
   }
 
-  const esquinas = [0, 4, 20, 24].filter((pos) => posicionesVacias.includes(pos))
+  const esquinas = [0, 4, 20, 24].filter(pos => posicionesVacias.includes(pos))
   if (esquinas.length > 0) {
     return esquinas[0]
   }
 
-  const bordes = [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23].filter((pos) => posicionesVacias.includes(pos))
+  const bordes = [
+    1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+  ].filter(pos => posicionesVacias.includes(pos))
   if (bordes.length > 0) {
     return bordes[0]
   }
@@ -216,8 +251,8 @@ function estrategiaPosicional (posicionesVacias) {
 }
 
 function verificarGanador (board, simbolo) {
-  return COMBINACIONES_GANADOR.some((combinacion) =>
-    combinacion.every((posicion) => board[posicion] === simbolo)
+  return COMBINACIONES_GANADOR.some(combinacion =>
+    combinacion.every(posicion => board[posicion] === simbolo)
   )
 }
 

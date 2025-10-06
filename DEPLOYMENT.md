@@ -220,10 +220,12 @@ vercel env add NODE_ENV production
 
 ```javascript
 // En server.js, agregar si es necesario
-app.use(cors({
-  origin: ['https://tu-dominio.com'],
-  credentials: true
-}))
+app.use(
+  cors({
+    origin: ['https://tu-dominio.com'],
+    credentials: true
+  })
+)
 ```
 
 ## Comandos Útiles

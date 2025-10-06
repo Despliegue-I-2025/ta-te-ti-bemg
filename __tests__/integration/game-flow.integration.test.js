@@ -79,7 +79,10 @@ describe('Integration Tests - Game Flow', () => {
     })
 
     test('should handle 5x5 game with some moves already made', async () => {
-      const board = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      const board = [
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
       const response = await request(app)
         .post('/move')
         .send({ board })

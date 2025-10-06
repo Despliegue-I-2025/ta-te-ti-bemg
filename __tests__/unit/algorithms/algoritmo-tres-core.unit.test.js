@@ -8,9 +8,11 @@ const CONFIG = BOARD_CONFIGS.TRES
 
 describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
   // Helper functions
-  const createEmptyBoard = (size) => new Array(size).fill(SYMBOLS.EMPTY)
-  const getEmptyPositions = (board) =>
-    board.map((cell, index) => (cell === SYMBOLS.EMPTY ? index : null)).filter(i => i !== null)
+  const createEmptyBoard = size => new Array(size).fill(SYMBOLS.EMPTY)
+  const getEmptyPositions = board =>
+    board
+      .map((cell, index) => (cell === SYMBOLS.EMPTY ? index : null))
+      .filter(i => i !== null)
 
   // Mock dependencies for isolated unit testing
   const mockDependencies = (overrides = {}) => ({
@@ -31,7 +33,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const board = createEmptyBoard(9)
       const emptyPositions = getEmptyPositions(board)
       const dependencies = mockDependencies()
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(CONFIG.center)
     })
 
@@ -40,7 +46,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       board[0] = SYMBOLS.O
       const emptyPositions = getEmptyPositions(board)
       const dependencies = mockDependencies()
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(CONFIG.center)
     })
 
@@ -53,7 +63,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const dependencies = mockDependencies({
         buscarMovimientoGanadorFn: () => 2
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(2)
     })
 
@@ -67,7 +81,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoGanadorFn: () => null,
         buscarMovimientoCompletarFn: () => 2
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(2)
     })
   })
@@ -81,7 +99,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         obtenerPosicionesOponenteFn: () => [CONFIG.center],
         estrategiaPosicionalFn: () => CONFIG.corners[0]
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(CONFIG.corners).toContain(result)
     })
 
@@ -92,8 +114,15 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const dependencies = mockDependencies({
         obtenerPosicionesOponenteFn: () => [CONFIG.corners[0]]
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
-      expect([CONFIG.center, CONFIG.diagonalOpposites[CONFIG.corners[0]]]).toContain(result)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
+      expect([
+        CONFIG.center,
+        CONFIG.diagonalOpposites[CONFIG.corners[0]]
+      ]).toContain(result)
     })
 
     test('should take center or corner when opponent is in edge', () => {
@@ -103,7 +132,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const dependencies = mockDependencies({
         obtenerPosicionesOponenteFn: () => [CONFIG.edges[0]]
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect([CONFIG.center, ...CONFIG.corners]).toContain(result)
     })
 
@@ -115,7 +148,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const dependencies = mockDependencies({
         obtenerPosicionesOponenteFn: () => [CONFIG.corners[0], CONFIG.edges[0]]
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(emptyPositions).toContain(result)
     })
   })
@@ -130,7 +167,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const dependencies = mockDependencies({
         buscarMovimientoGanadorFn: () => 2
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(2)
     })
 
@@ -143,7 +184,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const dependencies = mockDependencies({
         buscarMovimientoGanadorFn: () => 6
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(6)
     })
 
@@ -156,7 +201,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const dependencies = mockDependencies({
         buscarMovimientoGanadorFn: () => 8
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(8)
     })
 
@@ -170,7 +219,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoGanadorFn: () => null,
         buscarMovimientoCompletarFn: () => 2
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(2)
     })
 
@@ -184,7 +237,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoGanadorFn: () => null,
         buscarMovimientoCompletarFn: () => 6
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(6)
     })
 
@@ -198,7 +255,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoGanadorFn: () => null,
         buscarMovimientoCompletarFn: () => 8
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(8)
     })
   })
@@ -215,7 +276,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoGanadorFn: () => null,
         buscarMovimientoCompletarFn: () => 2
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(2)
     })
 
@@ -231,7 +296,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoCompletarFn: () => null,
         estrategiaPosicionalFn: () => 4
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(4)
     })
 
@@ -246,7 +315,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoCompletarFn: () => null,
         estrategiaPosicionalFn: () => 8
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(8)
     })
 
@@ -268,7 +341,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         obtenerPosicionesOponenteFn: () => [1, 3, 5, 7],
         estrategiaPosicionalFn: () => 8
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(8)
     })
   })
@@ -278,7 +355,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
       const board = new Array(9).fill(SYMBOLS.X)
       const emptyPositions = []
       const dependencies = mockDependencies()
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBeUndefined()
     })
 
@@ -295,7 +376,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         buscarMovimientoGanadorFn: () => 2,
         buscarMovimientoCompletarFn: () => 5
       })
-      const result = algoritmoTresRefactored(board, emptyPositions, dependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        dependencies
+      )
       expect(result).toBe(2)
     })
 
@@ -313,7 +398,11 @@ describe('Unit Tests - Algoritmo Tres Core (3x3 DI)', () => {
         estrategiaBloqueoFilaColumnaFn: () => null,
         determinarSimbolosFn: () => ({ player: SYMBOLS.X, opponent: SYMBOLS.O })
       }
-      const result = algoritmoTresRefactored(board, emptyPositions, customDependencies)
+      const result = algoritmoTresRefactored(
+        board,
+        emptyPositions,
+        customDependencies
+      )
       expect([4, 5]).toContain(result)
     })
   })

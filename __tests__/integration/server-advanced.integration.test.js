@@ -45,9 +45,7 @@ describe('Advanced Server Integration Tests', () => {
     })
 
     test('should handle missing board parameter', async () => {
-      const response = await request(app)
-        .get('/move')
-        .expect(400)
+      const response = await request(app).get('/move').expect(400)
 
       expect(response.body).toHaveProperty('error')
     })
@@ -141,10 +139,7 @@ describe('Advanced Server Integration Tests', () => {
     })
 
     test('should handle missing board property', async () => {
-      const response = await request(app)
-        .post('/move')
-        .send({})
-        .expect(400)
+      const response = await request(app).post('/move').send({}).expect(400)
 
       expect(response.body).toHaveProperty('error')
       expect(response.body.error).toContain('required')
@@ -243,10 +238,7 @@ describe('Advanced Server Integration Tests', () => {
       const board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
       const promises = Array.from({ length: 10 }, () =>
-        request(app)
-          .post('/move')
-          .send({ board })
-          .expect(200)
+        request(app).post('/move').send({ board }).expect(200)
       )
 
       const responses = await Promise.all(promises)

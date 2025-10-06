@@ -19,7 +19,9 @@ describe('Unit Tests - Configuration', () => {
       expect(BOARD_CONFIGS.CINCO.size).toBe(25)
       expect(BOARD_CONFIGS.CINCO.center).toBe(12)
       expect(BOARD_CONFIGS.CINCO.corners).toEqual([0, 4, 20, 24])
-      expect(BOARD_CONFIGS.CINCO.edges).toEqual([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23])
+      expect(BOARD_CONFIGS.CINCO.edges).toEqual([
+        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+      ])
       expect(BOARD_CONFIGS.CINCO.winningCombinations).toHaveLength(43)
     })
 
@@ -70,7 +72,9 @@ describe('Unit Tests - Configuration', () => {
 
     test('should have correct edge positions', () => {
       expect(BOARD_CONFIGS.TRES.edges).toEqual([1, 3, 5, 7])
-      expect(BOARD_CONFIGS.CINCO.edges).toEqual([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23])
+      expect(BOARD_CONFIGS.CINCO.edges).toEqual([
+        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+      ])
     })
 
     test('should have correct center positions', () => {

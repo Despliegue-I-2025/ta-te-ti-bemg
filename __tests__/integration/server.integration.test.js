@@ -7,9 +7,7 @@ import { app } from '../../app/server.js'
 describe('Integration Tests - Server', () => {
   describe('GET /health', () => {
     test('should return health status', async () => {
-      const response = await request(app)
-        .get('/health')
-        .expect(200)
+      const response = await request(app).get('/health').expect(200)
 
       expect(response.body).toHaveProperty('status', 'OK')
       expect(response.body).toHaveProperty('timestamp')
@@ -54,10 +52,7 @@ describe('Integration Tests - Server', () => {
     })
 
     test('should return 400 for missing board', async () => {
-      const response = await request(app)
-        .post('/move')
-        .send({})
-        .expect(400)
+      const response = await request(app).post('/move').send({}).expect(400)
 
       expect(response.body).toHaveProperty('error')
     })
@@ -100,10 +95,7 @@ describe('Integration Tests - Server', () => {
       const board = new Array(25).fill(0)
       const start = Date.now()
 
-      await request(app)
-        .post('/move')
-        .send({ board })
-        .expect(200)
+      await request(app).post('/move').send({ board }).expect(200)
 
       const duration = Date.now() - start
       expect(duration).toBeLessThan(1000) // Should respond within 1 second

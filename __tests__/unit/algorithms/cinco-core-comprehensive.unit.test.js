@@ -5,8 +5,10 @@ import algoritmoCincoCore from '../../../app/algoritmo.cinco.core.js'
 
 describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
   // Helper function to create empty positions
-  const createEmptyPositions = (board) => {
-    return board.map((cell, index) => cell === 0 ? index : null).filter(i => i !== null)
+  const createEmptyPositions = board => {
+    return board
+      .map((cell, index) => (cell === 0 ? index : null))
+      .filter(i => i !== null)
   }
 
   describe('Basic Functionality - Lines 7-81', () => {
@@ -26,11 +28,15 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
       const customConfig = {
         center: 5,
         corners: [0, 4, 20, 24],
-        edges: [1, 2, 3, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23],
+        edges: [
+          1, 2, 3, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+        ],
         winningCombinations: []
       }
 
-      const result = algoritmoCincoCore(board, emptyPositions, { config: customConfig })
+      const result = algoritmoCincoCore(board, emptyPositions, {
+        config: customConfig
+      })
 
       expect([0, 5]).toContain(result) // Should use custom center or default
     })
@@ -57,8 +63,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
   describe('Positional Strategy - Lines 87-91', () => {
     test('should take center if available (line 87-91)', () => {
-      const board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-      const emptyPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+      const board = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1
+      ]
+      const emptyPositions = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -66,8 +78,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
     })
 
     test('should take corner when center is occupied (line 87-91)', () => {
-      const board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -75,8 +93,13 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
     })
 
     test('should take edge when center and corners are occupied (line 87-91)', () => {
-      const board = [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]
-      const emptyPositions = [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23]
+      const board = [
+        1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+        1
+      ]
+      const emptyPositions = [
+        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -87,8 +110,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
   describe('Advanced Strategies - Lines 97-101', () => {
     test('should use diagonal blocking strategy (line 97-101)', () => {
       // O in corner, should block opposite diagonal
-      const board = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -97,8 +126,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should use row/column blocking strategy (line 97-101)', () => {
       // O in edge position, should block row/column
-      const board = [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -107,7 +142,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should use positional strategy as fallback (line 97-101)', () => {
       // Complex scenario where other strategies don't apply
-      const board = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+      const board = [
+        1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        0
+      ]
       const emptyPositions = [24]
 
       const result = algoritmoCincoCore(board, emptyPositions)
@@ -119,8 +157,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
   describe('Winning and Blocking Strategies - Lines 131, 139, 146', () => {
     test('should complete winning combination (line 131)', () => {
       // X has two in a row, should complete the third
-      const board = [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -129,8 +173,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should block opponent winning combination (line 139)', () => {
       // O has two in a row, should block the third
-      const board = [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -139,8 +189,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should complete winning column (line 131)', () => {
       // X has two in a column, should complete the third
-      const board = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -149,8 +205,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should block opponent winning column (line 139)', () => {
       // O has two in a column, should block the third
-      const board = [2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -159,8 +221,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should complete winning diagonal (line 131)', () => {
       // X has two in diagonal, should complete the third
-      const board = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -169,8 +237,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should block opponent winning diagonal (line 139)', () => {
       // O has two in diagonal, should block the third
-      const board = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
@@ -179,7 +253,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should return first available empty position as final fallback (line 146)', () => {
       // Complex scenario where all strategies fail
-      const board = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+      const board = [
+        1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        0
+      ]
       const emptyPositions = [24]
 
       const result = algoritmoCincoCore(board, emptyPositions)
@@ -200,7 +277,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
 
     test('should handle complex 5x5 scenarios', () => {
       // Complex scenario with multiple strategies
-      const board = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+      const board = [
+        1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        0
+      ]
       const emptyPositions = [24]
 
       const result = algoritmoCincoCore(board, emptyPositions)
@@ -216,7 +296,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
       const customObtenerPosicionesOponente = () => []
       const customEstrategiaBloqueoDiagonal = () => null
       const customEstrategiaBloqueoFilaColumna = () => null
-      const customDeterminarSimbolos = () => ({ miSimbolo: 1, simboloOponente: 2 })
+      const customDeterminarSimbolos = () => ({
+        miSimbolo: 1,
+        simboloOponente: 2
+      })
 
       const result = algoritmoCincoCore(board, emptyPositions, {
         estrategiaPosicionalFn: customEstrategiaPosicional,
@@ -233,28 +316,52 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco Core', () => {
   describe('Complex Scenarios', () => {
     test('should handle multiple winning opportunities', () => {
       // X has multiple winning opportunities
-      const board = [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
-      expect([2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]).toContain(result)
+      expect([
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]).toContain(result)
     })
 
     test('should handle multiple blocking opportunities', () => {
       // O has multiple winning opportunities that need blocking
-      const board = [2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 
-      expect([2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]).toContain(result)
+      expect([
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]).toContain(result)
     })
 
     test('should prioritize winning over blocking', () => {
       // X can win, O can also win - should prioritize X winning
-      const board = [1, 1, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 1, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoCore(board, emptyPositions)
 

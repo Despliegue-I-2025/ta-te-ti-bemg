@@ -1,14 +1,8 @@
 export default {
   testEnvironment: 'node',
   moduleFileExtensions: ['js', 'json'],
-  testMatch: [
-    '**/__tests__/**/*.js'
-  ],
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/old_tests/',
-    '/coverage/'
-  ],
+  testMatch: ['**/__tests__/**/*.js'],
+  testPathIgnorePatterns: ['/node_modules/', '/old_tests/', '/coverage/'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/app/$1'
   },

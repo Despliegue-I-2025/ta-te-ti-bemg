@@ -17,7 +17,10 @@ export function handleOpponentInCorner5x5 (opponentPos, emptyPositions) {
   }
 
   const diagonalOpuesta = CONFIG.diagonalOpposites[opponentPos]
-  if (diagonalOpuesta !== undefined && emptyPositions.includes(diagonalOpuesta)) {
+  if (
+    diagonalOpuesta !== undefined &&
+    emptyPositions.includes(diagonalOpuesta)
+  ) {
     return diagonalOpuesta
   }
 
@@ -30,7 +33,7 @@ export function handleOpponentInCorner5x5 (opponentPos, emptyPositions) {
  * @returns {number|null} Corner position or null if none available
  */
 export function handleOpponentInCenter5x5 (emptyPositions) {
-  const esquinasDisponibles = CONFIG.corners.filter((pos) =>
+  const esquinasDisponibles = CONFIG.corners.filter(pos =>
     emptyPositions.includes(pos)
   )
 
@@ -48,7 +51,11 @@ export function handleOpponentInCenter5x5 (emptyPositions) {
  * @param {number} boardSize - Board size (5 for 5x5)
  * @returns {number|null} Blocking position or null if not available
  */
-export function handleOpponentInEdge5x5 (opponentPos, emptyPositions, boardSize = 5) {
+export function handleOpponentInEdge5x5 (
+  opponentPos,
+  emptyPositions,
+  boardSize = 5
+) {
   if (!CONFIG.edges.includes(opponentPos)) {
     return null
   }

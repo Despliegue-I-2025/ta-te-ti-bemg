@@ -31,13 +31,23 @@ function algoritmoTres (board, emptyPositions) {
   // Movimiento 3: Estrategia específica
   if (vacias === CONFIG.size - 2) {
     // Intentar ganar
-    const movimientoGanador = findImmediateWin(board, posicionesVacias, miSimbolo, CONFIG.winningCombinations)
+    const movimientoGanador = findImmediateWin(
+      board,
+      posicionesVacias,
+      miSimbolo,
+      CONFIG.winningCombinations
+    )
     if (movimientoGanador !== null) {
       return movimientoGanador
     }
 
     // Bloquear oponente
-    const movimientoBloqueo = findImmediateBlock(board, posicionesVacias, simboloOponente, CONFIG.winningCombinations)
+    const movimientoBloqueo = findImmediateBlock(
+      board,
+      posicionesVacias,
+      simboloOponente,
+      CONFIG.winningCombinations
+    )
     if (movimientoBloqueo !== null) {
       return movimientoBloqueo
     }
@@ -57,25 +67,45 @@ function algoritmoTres (board, emptyPositions) {
   // Movimientos 4+: Estrategia avanzada
   if (vacias <= CONFIG.size - 3) {
     // Intentar ganar
-    const movimientoGanador = findImmediateWin(board, posicionesVacias, miSimbolo, CONFIG.winningCombinations)
+    const movimientoGanador = findImmediateWin(
+      board,
+      posicionesVacias,
+      miSimbolo,
+      CONFIG.winningCombinations
+    )
     if (movimientoGanador !== null) {
       return movimientoGanador
     }
 
     // Bloquear oponente
-    const movimientoBloqueo = findImmediateBlock(board, posicionesVacias, simboloOponente, CONFIG.winningCombinations)
+    const movimientoBloqueo = findImmediateBlock(
+      board,
+      posicionesVacias,
+      simboloOponente,
+      CONFIG.winningCombinations
+    )
     if (movimientoBloqueo !== null) {
       return movimientoBloqueo
     }
 
     // Completar combinación propia
-    const movimientoCompletar = findStrategicCompletion(board, posicionesVacias, miSimbolo, CONFIG.winningCombinations)
+    const movimientoCompletar = findStrategicCompletion(
+      board,
+      posicionesVacias,
+      miSimbolo,
+      CONFIG.winningCombinations
+    )
     if (movimientoCompletar !== null) {
       return movimientoCompletar
     }
 
     // Bloquear combinación oponente
-    const movimientoBloquearCombinacion = findStrategicCompletion(board, posicionesVacias, simboloOponente, CONFIG.winningCombinations)
+    const movimientoBloquearCombinacion = findStrategicCompletion(
+      board,
+      posicionesVacias,
+      simboloOponente,
+      CONFIG.winningCombinations
+    )
     if (movimientoBloquearCombinacion !== null) {
       return movimientoBloquearCombinacion
     }

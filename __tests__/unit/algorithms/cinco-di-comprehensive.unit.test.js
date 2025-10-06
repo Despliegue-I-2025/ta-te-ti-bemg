@@ -5,8 +5,10 @@ import algoritmoCincoDi from '../../../app/algoritmo.cinco.di.js'
 
 describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
   // Helper function to create empty positions
-  const createEmptyPositions = (board) => {
-    return board.map((cell, index) => cell === 0 ? index : null).filter(i => i !== null)
+  const createEmptyPositions = board => {
+    return board
+      .map((cell, index) => (cell === 0 ? index : null))
+      .filter(i => i !== null)
   }
 
   describe('Basic Functionality - Lines 9-117', () => {
@@ -26,11 +28,15 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
       const customConfig = {
         center: 5,
         corners: [0, 4, 20, 24],
-        edges: [1, 2, 3, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23],
+        edges: [
+          1, 2, 3, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+        ],
         winningCombinations: []
       }
 
-      const result = algoritmoCincoDi(board, emptyPositions, { config: customConfig })
+      const result = algoritmoCincoDi(board, emptyPositions, {
+        config: customConfig
+      })
 
       expect([5, 12]).toContain(result) // Should use custom center or default
     })
@@ -61,7 +67,9 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
       const customConfig = {
         center: 5,
         corners: [0, 4, 20, 24],
-        edges: [1, 2, 3, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23],
+        edges: [
+          1, 2, 3, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+        ],
         winningCombinations: []
       }
 
@@ -72,7 +80,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
       const customObtenerPosicionesOponente = () => []
       const customEstrategiaBloqueoDiagonal = () => null
       const customEstrategiaBloqueoFilaColumna = () => null
-      const customDeterminarSimbolos = () => ({ miSimbolo: 1, simboloOponente: 2 })
+      const customDeterminarSimbolos = () => ({
+        miSimbolo: 1,
+        simboloOponente: 2
+      })
 
       const result = algoritmoCincoDi(board, emptyPositions, {
         config: customConfig,
@@ -92,8 +103,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
   describe('Positional Strategy - Lines 149, 159, 166', () => {
     test('should take center if available (line 149)', () => {
-      const board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-      const emptyPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+      const board = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1
+      ]
+      const emptyPositions = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -101,8 +118,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
     })
 
     test('should take corner when center is occupied (line 159)', () => {
-      const board = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -110,8 +133,13 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
     })
 
     test('should take edge when center and corners are occupied (line 166)', () => {
-      const board = [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1]
-      const emptyPositions = [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23]
+      const board = [
+        1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+        1
+      ]
+      const emptyPositions = [
+        1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -122,8 +150,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
   describe('Advanced Strategies - Lines 192', () => {
     test('should use diagonal blocking strategy (line 192)', () => {
       // O in corner, should block opposite diagonal
-      const board = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -132,8 +166,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should use row/column blocking strategy (line 192)', () => {
       // O in edge position, should block row/column
-      const board = [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -142,7 +182,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should use positional strategy as fallback (line 192)', () => {
       // Complex scenario where other strategies don't apply
-      const board = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+      const board = [
+        1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        0
+      ]
       const emptyPositions = [24]
 
       const result = algoritmoCincoDi(board, emptyPositions)
@@ -154,8 +197,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
   describe('Winning and Blocking Strategies - Lines 210-215', () => {
     test('should complete winning combination (line 210-215)', () => {
       // X has two in a row, should complete the third
-      const board = [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -164,8 +213,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should block opponent winning combination (line 210-215)', () => {
       // O has two in a row, should block the third
-      const board = [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -174,8 +229,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should complete winning column (line 210-215)', () => {
       // X has two in a column, should complete the third
-      const board = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -184,8 +245,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should block opponent winning column (line 210-215)', () => {
       // O has two in a column, should block the third
-      const board = [2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -194,8 +261,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should complete winning diagonal (line 210-215)', () => {
       // X has two in diagonal, should complete the third
-      const board = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -204,8 +277,14 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should block opponent winning diagonal (line 210-215)', () => {
       // O has two in diagonal, should block the third
-      const board = [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        22, 23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
@@ -225,7 +304,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
 
     test('should handle complex 5x5 scenarios', () => {
       // Complex scenario with multiple strategies
-      const board = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+      const board = [
+        1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        0
+      ]
       const emptyPositions = [24]
 
       const result = algoritmoCincoDi(board, emptyPositions)
@@ -241,7 +323,10 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
       const customObtenerPosicionesOponente = () => []
       const customEstrategiaBloqueoDiagonal = () => null
       const customEstrategiaBloqueoFilaColumna = () => null
-      const customDeterminarSimbolos = () => ({ miSimbolo: 1, simboloOponente: 2 })
+      const customDeterminarSimbolos = () => ({
+        miSimbolo: 1,
+        simboloOponente: 2
+      })
 
       const result = algoritmoCincoDi(board, emptyPositions, {
         estrategiaPosicionalFn: customEstrategiaPosicional,
@@ -258,28 +343,52 @@ describe('Comprehensive Unit Tests - Algoritmo Cinco DI', () => {
   describe('Complex Scenarios', () => {
     test('should handle multiple winning opportunities', () => {
       // X has multiple winning opportunities
-      const board = [1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
-      expect([2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]).toContain(result)
+      expect([
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]).toContain(result)
     })
 
     test('should handle multiple blocking opportunities', () => {
       // O has multiple winning opportunities that need blocking
-      const board = [2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 
-      expect([2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]).toContain(result)
+      expect([
+        2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]).toContain(result)
     })
 
     test('should prioritize winning over blocking', () => {
       // X can win, O can also win - should prioritize X winning
-      const board = [1, 1, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const emptyPositions = [2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+      const board = [
+        1, 1, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0
+      ]
+      const emptyPositions = [
+        2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24
+      ]
 
       const result = algoritmoCincoDi(board, emptyPositions)
 

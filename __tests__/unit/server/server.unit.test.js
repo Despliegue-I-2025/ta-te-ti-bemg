@@ -7,8 +7,7 @@ import { app } from '../../../app/server.js'
 describe('Unit Tests - Server', () => {
   describe('GET /health', () => {
     test('should return health status', async () => {
-      const response = await request(app)
-        .get('/health')
+      const response = await request(app).get('/health')
 
       expect(response.status).toBe(200)
       expect(response.body).toHaveProperty('status', 'OK')
@@ -49,8 +48,7 @@ describe('Unit Tests - Server', () => {
     })
 
     test('should handle missing board parameter', async () => {
-      const response = await request(app)
-        .get('/move')
+      const response = await request(app).get('/move')
 
       expect(response.status).toBe(400)
       expect(response.body.error).toBeDefined()
@@ -88,21 +86,15 @@ describe('Unit Tests - Server', () => {
 
     test('should handle edge cases with malformed parameters', async () => {
       // Test with null board
-      const response1 = await request(app)
-        .get('/move')
-        .query({ board: null })
+      const response1 = await request(app).get('/move').query({ board: null })
       expect(response1.status).toBe(400)
 
       // Test with empty string board parameter
-      const response2 = await request(app)
-        .get('/move')
-        .query({ board: '' })
+      const response2 = await request(app).get('/move').query({ board: '' })
       expect(response2.status).toBe(400)
 
       // Test with board parameter that is not a string
-      const response3 = await request(app)
-        .get('/move')
-        .query({ board: 123 })
+      const response3 = await request(app).get('/move').query({ board: 123 })
       expect(response3.status).toBe(400)
     })
   })
@@ -110,9 +102,7 @@ describe('Unit Tests - Server', () => {
   describe('POST /move', () => {
     test('should handle valid 3x3 board', async () => {
       const board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-      const response = await request(app)
-        .post('/move')
-        .send({ board })
+      const response = await request(app).post('/move').send({ board })
 
       expect(response.status).toBe(200)
       expect(response.body).toHaveProperty('movimiento')
@@ -121,9 +111,7 @@ describe('Unit Tests - Server', () => {
 
     test('should handle valid 5x5 board', async () => {
       const board = new Array(25).fill(0)
-      const response = await request(app)
-        .post('/move')
-        .send({ board })
+      const response = await request(app).post('/move').send({ board })
 
       expect(response.status).toBe(200)
       expect(response.body).toHaveProperty('movimiento')
@@ -132,9 +120,7 @@ describe('Unit Tests - Server', () => {
 
     test('should handle board with invalid values', async () => {
       const board = [0, 0, 0, 0, 0, 0, 0, 0, 3] // Invalid value 3
-      const response = await request(app)
-        .post('/move')
-        .send({ board })
+      const response = await request(app).post('/move').send({ board })
 
       expect(response.status).toBe(400)
       expect(response.body.error).toContain('invalid values')
@@ -150,9 +136,7 @@ describe('Unit Tests - Server', () => {
     })
 
     test('should handle missing board property', async () => {
-      const response = await request(app)
-        .post('/move')
-        .send({})
+      const response = await request(app).post('/move').send({})
 
       expect(response.status).toBe(400)
       expect(response.body.error).toContain('Board parameter is required')
@@ -160,9 +144,7 @@ describe('Unit Tests - Server', () => {
 
     test('should handle board with no empty movimientos', async () => {
       const board = new Array(9).fill(1)
-      const response = await request(app)
-        .post('/move')
-        .send({ board })
+      const response = await request(app).post('/move').send({ board })
 
       expect(response.status).toBe(400)
       expect(response.body.error).toContain('No empty positions available')
@@ -188,18 +170,14 @@ describe('Unit Tests - Server', () => {
 
     test('should handle very large board', async () => {
       const board = new Array(100).fill(0)
-      const response = await request(app)
-        .post('/move')
-        .send({ board })
+      const response = await request(app).post('/move').send({ board })
 
       expect(response.status).toBe(400)
       expect(response.body.error).toContain('9 or 25 positions')
     })
 
     test('should handle empty board array', async () => {
-      const response = await request(app)
-        .post('/move')
-        .send({ board: [] })
+      const response = await request(app).post('/move').send({ board: [] })
 
       expect(response.status).toBe(400)
       expect(response.body.error).toContain('9 or 25 positions')
