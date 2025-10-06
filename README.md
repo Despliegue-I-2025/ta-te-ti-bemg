@@ -438,6 +438,102 @@ CMD ["node", "--experimental-vm-modules", "app/server.js"]
 - **Testing exhaustivo** con casos edge cubiertos
 - **Mantenibilidad** a largo plazo garantizada
 
+## 🚀 CI/CD y Despliegue Automatizado
+
+### Configuración de Linting y Formateo
+
+El proyecto incluye herramientas de calidad de código:
+
+```bash
+# Instalar dependencias de desarrollo
+npm install
+
+# Ejecutar linting
+npm run lint
+
+# Corregir errores de linting automáticamente
+npm run lint:fix
+
+# Verificar formato de código
+npm run format:check
+
+# Formatear código automáticamente
+npm run format
+```
+
+### Git Hooks con Husky
+
+Se configuraron hooks de Git para mantener la calidad del código:
+
+- **Pre-commit**: Ejecuta linting y pruebas básicas
+- **Pre-push**: Ejecuta linting y pruebas con cobertura
+
+```bash
+# Instalar hooks de Git
+npm run prepare
+
+# Los hooks se ejecutan automáticamente en cada commit/push
+```
+
+### GitHub Actions CI/CD
+
+El proyecto incluye un pipeline completo de CI/CD:
+
+#### Características del Pipeline:
+- **Testing en múltiples versiones de Node.js** (18.x, 20.x)
+- **Linting automático** con ESLint
+- **Formateo de código** con Prettier
+- **Pruebas unitarias e integración**
+- **Cobertura de código** con umbrales configurables
+- **Despliegue automático a Vercel** en ramas main/master
+
+#### Archivos de Configuración:
+- `.github/workflows/ci-cd.yml` - Pipeline de CI/CD
+- `vercel.json` - Configuración de Vercel
+- `.eslintrc.js` - Configuración de ESLint
+- `.prettierrc` - Configuración de Prettier
+
+### Despliegue en Vercel
+
+#### Configuración Requerida:
+
+1. **Variables de Entorno en Vercel:**
+   - `NODE_ENV=production`
+   - `PORT=3009`
+   - `API_VERSION=v1`
+   - `API_PREFIX=/api`
+   - `LOG_LEVEL=info`
+
+2. **Secrets de GitHub (para CI/CD):**
+   - `VERCEL_TOKEN` - Token de Vercel
+   - `ORG_ID` - ID de la organización en Vercel
+   - `PROJECT_ID` - ID del proyecto en Vercel
+
+#### Proceso de Despliegue:
+1. Push a rama `main` o `master`
+2. GitHub Actions ejecuta tests y linting
+3. Si todo pasa, despliega automáticamente a Vercel
+4. La aplicación estará disponible en la URL de Vercel
+
+### Variables de Entorno
+
+El proyecto utiliza variables de entorno para configuración:
+
+```bash
+# .env (incluido en el repositorio para estudio universitario)
+PORT=3009
+NODE_ENV=development
+API_VERSION=v1
+API_PREFIX=/api
+LOG_LEVEL=info
+COVERAGE_THRESHOLD_STATEMENTS=88
+COVERAGE_THRESHOLD_BRANCHES=77
+COVERAGE_THRESHOLD_FUNCTIONS=90
+COVERAGE_THRESHOLD_LINES=89
+```
+
+**Nota**: Para proyectos de producción, las variables sensibles deben configurarse en Vercel Dashboard.
+
 ## 🚀 Próximos Pasos
 
 ### Mejoras de Cobertura (Opcional):
@@ -456,7 +552,7 @@ CMD ["node", "--experimental-vm-modules", "app/server.js"]
 1. **Microservicios**: Separar algoritmos en servicios independientes
 2. **Cache distribuido**: Implementar Redis para optimización
 3. **Base de datos**: Persistir estadísticas de partidas
-4. **CI/CD**: Pipeline automatizado de despliegue
+4. **Monitoreo**: Implementar logging avanzado y métricas
 
 ## 📝 Notas de Desarrollo
 

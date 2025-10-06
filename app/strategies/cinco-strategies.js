@@ -1,9 +1,9 @@
 // 5x5 Tic-Tac-Toe Strategy Functions
 // Extracted from algoritm.cinco.core.js for better testability
 
-import { BOARD_CONFIGS } from '../config.js';
+import { BOARD_CONFIGS } from '../config.js'
 
-const CONFIG = BOARD_CONFIGS.CINCO;
+const CONFIG = BOARD_CONFIGS.CINCO
 
 /**
  * Handle opponent in corner position - block opposite diagonal
@@ -11,17 +11,17 @@ const CONFIG = BOARD_CONFIGS.CINCO;
  * @param {Array} emptyPositions - Available empty positions
  * @returns {number|null} Blocking position or null if not available
  */
-export function handleOpponentInCorner5x5(opponentPos, emptyPositions) {
+export function handleOpponentInCorner5x5 (opponentPos, emptyPositions) {
   if (!CONFIG.corners.includes(opponentPos)) {
-    return null;
+    return null
   }
 
-  const diagonalOpuesta = CONFIG.diagonalOpposites[opponentPos];
+  const diagonalOpuesta = CONFIG.diagonalOpposites[opponentPos]
   if (diagonalOpuesta !== undefined && emptyPositions.includes(diagonalOpuesta)) {
-    return diagonalOpuesta;
+    return diagonalOpuesta
   }
-  
-  return null;
+
+  return null
 }
 
 /**
@@ -29,16 +29,16 @@ export function handleOpponentInCorner5x5(opponentPos, emptyPositions) {
  * @param {Array} emptyPositions - Available empty positions
  * @returns {number|null} Corner position or null if none available
  */
-export function handleOpponentInCenter5x5(emptyPositions) {
+export function handleOpponentInCenter5x5 (emptyPositions) {
   const esquinasDisponibles = CONFIG.corners.filter((pos) =>
     emptyPositions.includes(pos)
-  );
-  
+  )
+
   if (esquinasDisponibles.length > 0) {
-    return esquinasDisponibles[0];
+    return esquinasDisponibles[0]
   }
-  
-  return null;
+
+  return null
 }
 
 /**
@@ -48,31 +48,31 @@ export function handleOpponentInCenter5x5(emptyPositions) {
  * @param {number} boardSize - Board size (5 for 5x5)
  * @returns {number|null} Blocking position or null if not available
  */
-export function handleOpponentInEdge5x5(opponentPos, emptyPositions, boardSize = 5) {
+export function handleOpponentInEdge5x5 (opponentPos, emptyPositions, boardSize = 5) {
   if (!CONFIG.edges.includes(opponentPos)) {
-    return null;
+    return null
   }
 
-  const fila = Math.floor(opponentPos / boardSize);
-  const columna = opponentPos % boardSize;
+  const fila = Math.floor(opponentPos / boardSize)
+  const columna = opponentPos % boardSize
 
   // Check row positions
   for (let i = 0; i < boardSize; i++) {
-    const posFila = fila * boardSize + i;
+    const posFila = fila * boardSize + i
     if (emptyPositions.includes(posFila) && posFila !== opponentPos) {
-      return posFila;
+      return posFila
     }
   }
 
   // Check column positions
   for (let i = 0; i < boardSize; i++) {
-    const posColumna = i * boardSize + columna;
+    const posColumna = i * boardSize + columna
     if (emptyPositions.includes(posColumna) && posColumna !== opponentPos) {
-      return posColumna;
+      return posColumna
     }
   }
 
-  return null;
+  return null
 }
 
 /**
@@ -81,18 +81,18 @@ export function handleOpponentInEdge5x5(opponentPos, emptyPositions, boardSize =
  * @param {Array} emptyPositions - Available empty positions
  * @returns {number|null} Best strategic move or null if none available
  */
-export function getStrategicMove5x5(opponentPos, emptyPositions) {
+export function getStrategicMove5x5 (opponentPos, emptyPositions) {
   // Try corner strategy first
-  const cornerMove = handleOpponentInCorner5x5(opponentPos, emptyPositions);
+  const cornerMove = handleOpponentInCorner5x5(opponentPos, emptyPositions)
   if (cornerMove !== null) {
-    return cornerMove;
+    return cornerMove
   }
 
   // Try center strategy
   if (opponentPos === CONFIG.center) {
-    return handleOpponentInCenter5x5(emptyPositions);
+    return handleOpponentInCenter5x5(emptyPositions)
   }
 
   // Try edge strategy
-  return handleOpponentInEdge5x5(opponentPos, emptyPositions);
+  return handleOpponentInEdge5x5(opponentPos, emptyPositions)
 }

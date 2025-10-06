@@ -27,18 +27,18 @@ export const BOARD_CONFIGS = {
       [10, 11, 12], [11, 12, 13], [12, 13, 14], // Fila 2
       [15, 16, 17], [16, 17, 18], [17, 18, 19], // Fila 3
       [20, 21, 22], [21, 22, 23], [22, 23, 24], // Fila 4
-      
+
       // Columnas verticales (3 combinaciones por columna)
       [0, 5, 10], [5, 10, 15], [10, 15, 20], // Columna 0
       [1, 6, 11], [6, 11, 16], [11, 16, 21], // Columna 1
       [2, 7, 12], [7, 12, 17], [12, 17, 22], // Columna 2
       [3, 8, 13], [8, 13, 18], [13, 18, 23], // Columna 3
       [4, 9, 14], [9, 14, 19], [14, 19, 24], // Columna 4
-      
+
       // Diagonales principales (3 combinaciones)
       [0, 6, 12], [6, 12, 18], [12, 18, 24], // Diagonal principal
       [4, 8, 12], [8, 12, 16], [12, 16, 20], // Diagonal secundaria
-      
+
       // Diagonales menores (6 combinaciones adicionales)
       [2, 8, 14], [1, 7, 13], [7, 13, 19], // Diagonales menores
       [3, 7, 11], [7, 11, 15], [5, 11, 17], [11, 17, 23] // Más diagonales menores
@@ -47,10 +47,10 @@ export const BOARD_CONFIGS = {
       0: 24, 4: 20, 20: 4, 24: 0
     }
   }
-};
+}
 
 export const SYMBOLS = {
   EMPTY: 0,
   X: 1,
   O: 2
-};
+}

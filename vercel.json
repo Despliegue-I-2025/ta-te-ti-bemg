@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "name": "tateti-bemg",
+  "builds": [
+    {
+      "src": "app/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app/server.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3009",
+    "API_VERSION": "v1",
+    "API_PREFIX": "/api",
+    "LOG_LEVEL": "info",
+    "COVERAGE_THRESHOLD_STATEMENTS": "88",
+    "COVERAGE_THRESHOLD_BRANCHES": "77",
+    "COVERAGE_THRESHOLD_FUNCTIONS": "90",
+    "COVERAGE_THRESHOLD_LINES": "89"
+  }
+}

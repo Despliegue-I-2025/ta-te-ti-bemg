@@ -1,19 +1,19 @@
 // Base Algorithm Utilities for Tic-Tac-Toe
 // Extracted shared logic from both 3x3 and 5x5 algorithms
 
-import { BOARD_CONFIGS, SYMBOLS } from './config.js';
+import { SYMBOLS } from './config.js'
 
 /**
  * Determine player and opponent symbols based on empty positions count
  * @param {number} emptyCount - Number of empty positions on the board
  * @returns {Object} Object with miSimbolo and simboloOponente
  */
-export function determinePlayerSymbols(emptyCount) {
-  const somosX = emptyCount % 2 === 1;
+export function determinePlayerSymbols (emptyCount) {
+  const somosX = emptyCount % 2 === 1
   return {
     miSimbolo: somosX ? SYMBOLS.X : SYMBOLS.O,
     simboloOponente: somosX ? SYMBOLS.O : SYMBOLS.X
-  };
+  }
 }
 
 /**
@@ -24,13 +24,18 @@ export function determinePlayerSymbols(emptyCount) {
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {boolean} True if the move wins
  */
-export function evaluateWinningMove(board, position, symbol, winningCombinations) {
-  const testBoard = [...board];
-  testBoard[position] = symbol;
-  
-  return winningCombinations.some((combinacion) =>
-    combinacion.every((pos) => testBoard[pos] === symbol)
-  );
+export function evaluateWinningMove (
+  board,
+  position,
+  symbol,
+  winningCombinations
+) {
+  const testBoard = [...board]
+  testBoard[position] = symbol
+
+  return winningCombinations.some(combinacion =>
+    combinacion.every(pos => testBoard[pos] === symbol)
+  )
 }
 
 /**
@@ -41,13 +46,18 @@ export function evaluateWinningMove(board, position, symbol, winningCombinations
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {number|null} Position of winning move or null if none
  */
-export function findImmediateWin(board, emptyPositions, symbol, winningCombinations) {
+export function findImmediateWin (
+  board,
+  emptyPositions,
+  symbol,
+  winningCombinations
+) {
   for (const position of emptyPositions) {
     if (evaluateWinningMove(board, position, symbol, winningCombinations)) {
-      return position;
+      return position
     }
   }
-  return null;
+  return null
 }
 
 /**
@@ -58,8 +68,18 @@ export function findImmediateWin(board, emptyPositions, symbol, winningCombinati
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {number|null} Position of blocking move or null if none
  */
-export function findImmediateBlock(board, emptyPositions, opponentSymbol, winningCombinations) {
-  return findImmediateWin(board, emptyPositions, opponentSymbol, winningCombinations);
+export function findImmediateBlock (
+  board,
+  emptyPositions,
+  opponentSymbol,
+  winningCombinations
+) {
+  return findImmediateWin(
+    board,
+    emptyPositions,
+    opponentSymbol,
+    winningCombinations
+  )
 }
 
 /**
@@ -70,23 +90,30 @@ export function findImmediateBlock(board, emptyPositions, opponentSymbol, winnin
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {number|null} Position of completion move or null if none
  */
-export function findStrategicCompletion(board, emptyPositions, symbol, winningCombinations) {
+export function findStrategicCompletion (
+  board,
+  emptyPositions,
+  symbol,
+  winningCombinations
+) {
   for (const combinacion of winningCombinations) {
     const posicionesCombinacion = combinacion.filter(
-      (pos) => board[pos] === symbol
-    );
+      pos => board[pos] === symbol
+    )
 
     if (posicionesCombinacion.length === 2) {
-      const posicionFaltante = combinacion.find((pos) => board[pos] === SYMBOLS.EMPTY);
+      const posicionFaltante = combinacion.find(
+        pos => board[pos] === SYMBOLS.EMPTY
+      )
       if (
         posicionFaltante !== undefined &&
         emptyPositions.includes(posicionFaltante)
       ) {
-        return posicionFaltante;
+        return posicionFaltante
       }
     }
   }
-  return null;
+  return null
 }
 
 /**
@@ -95,30 +122,30 @@ export function findStrategicCompletion(board, emptyPositions, symbol, winningCo
  * @param {Object} config - Board configuration with center, corners, edges
  * @returns {number} Best available position
  */
-export function selectPositionalMove(emptyPositions, config) {
+export function selectPositionalMove (emptyPositions, config) {
   // Priority 1: Center
   if (emptyPositions.includes(config.center)) {
-    return config.center;
+    return config.center
   }
 
   // Priority 2: Corners
-  const esquinasDisponibles = config.corners.filter((pos) => 
+  const esquinasDisponibles = config.corners.filter(pos =>
     emptyPositions.includes(pos)
-  );
+  )
   if (esquinasDisponibles.length > 0) {
-    return esquinasDisponibles[0];
+    return esquinasDisponibles[0]
   }
 
   // Priority 3: Edges
-  const bordesDisponibles = config.edges.filter((pos) => 
+  const bordesDisponibles = config.edges.filter(pos =>
     emptyPositions.includes(pos)
-  );
+  )
   if (bordesDisponibles.length > 0) {
-    return bordesDisponibles[0];
+    return bordesDisponibles[0]
   }
 
   // Fallback: First available position
-  return emptyPositions[0];
+  return emptyPositions[0]
 }
 
 /**
@@ -127,10 +154,10 @@ export function selectPositionalMove(emptyPositions, config) {
  * @param {number} opponentSymbol - Opponent symbol
  * @returns {Array} Array of opponent positions
  */
-export function getOpponentPositions(board, opponentSymbol) {
+export function getOpponentPositions (board, opponentSymbol) {
   return board
     .map((cell, index) => (cell === opponentSymbol ? index : null))
-    .filter((i) => i !== null);
+    .filter(i => i !== null)
 }
 
 /**
@@ -140,10 +167,10 @@ export function getOpponentPositions(board, opponentSymbol) {
  * @param {Array} winningCombinations - Array of winning combinations
  * @returns {boolean} True if player has won
  */
-export function verifyWinner(board, symbol, winningCombinations) {
-  return winningCombinations.some((combinacion) =>
-    combinacion.every((posicion) => board[posicion] === symbol)
-  );
+export function verifyWinner (board, symbol, winningCombinations) {
+  return winningCombinations.some(combinacion =>
+    combinacion.every(posicion => board[posicion] === symbol)
+  )
 }
 
 /**
@@ -151,8 +178,8 @@ export function verifyWinner(board, symbol, winningCombinations) {
  * @param {number} boardLength - Length of board array
  * @returns {number} Board size (3 for 3x3, 5 for 5x5)
  */
-export function getBoardSize(boardLength) {
-  return Math.sqrt(boardLength);
+export function getBoardSize (boardLength) {
+  return Math.sqrt(boardLength)
 }
 
 /**
@@ -161,11 +188,11 @@ export function getBoardSize(boardLength) {
  * @param {number} boardSize - Size of board (3 or 5)
  * @returns {Object} Object with row and column
  */
-export function getRowColumn(position, boardSize) {
+export function getRowColumn (position, boardSize) {
   return {
     row: Math.floor(position / boardSize),
     column: position % boardSize
-  };
+  }
 }
 
 /**
@@ -175,6 +202,6 @@ export function getRowColumn(position, boardSize) {
  * @param {number} boardSize - Size of board (3 or 5)
  * @returns {number} Board position
  */
-export function getPosition(row, column, boardSize) {
-  return row * boardSize + column;
+export function getPosition (row, column, boardSize) {
+  return row * boardSize + column
 }

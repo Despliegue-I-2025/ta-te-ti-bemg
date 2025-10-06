@@ -1,9 +1,9 @@
 // 3x3 Tic-Tac-Toe Strategy Functions
 // Extracted from algoritmo.tres.core.js for better testability
 
-import { BOARD_CONFIGS } from '../config.js';
+import { BOARD_CONFIGS } from '../config.js'
 
-const CONFIG = BOARD_CONFIGS.TRES;
+const CONFIG = BOARD_CONFIGS.TRES
 
 /**
  * Handle opponent in corner position - block opposite diagonal
@@ -11,17 +11,17 @@ const CONFIG = BOARD_CONFIGS.TRES;
  * @param {Array} emptyPositions - Available empty positions
  * @returns {number|null} Blocking position or null if not available
  */
-export function handleOpponentInCorner(opponentPos, emptyPositions) {
+export function handleOpponentInCorner (opponentPos, emptyPositions) {
   if (!CONFIG.corners.includes(opponentPos)) {
-    return null;
+    return null
   }
 
-  const diagonalOpuesta = CONFIG.diagonalOpposites[opponentPos];
+  const diagonalOpuesta = CONFIG.diagonalOpposites[opponentPos]
   if (diagonalOpuesta !== undefined && emptyPositions.includes(diagonalOpuesta)) {
-    return diagonalOpuesta;
+    return diagonalOpuesta
   }
-  
-  return null;
+
+  return null
 }
 
 /**
@@ -29,16 +29,16 @@ export function handleOpponentInCorner(opponentPos, emptyPositions) {
  * @param {Array} emptyPositions - Available empty positions
  * @returns {number|null} Corner position or null if none available
  */
-export function handleOpponentInCenter(emptyPositions) {
+export function handleOpponentInCenter (emptyPositions) {
   const esquinasDisponibles = CONFIG.corners.filter((pos) =>
     emptyPositions.includes(pos)
-  );
-  
+  )
+
   if (esquinasDisponibles.length > 0) {
-    return esquinasDisponibles[0];
+    return esquinasDisponibles[0]
   }
-  
-  return null;
+
+  return null
 }
 
 /**
@@ -48,31 +48,31 @@ export function handleOpponentInCenter(emptyPositions) {
  * @param {number} boardSize - Board size (3 for 3x3)
  * @returns {number|null} Blocking position or null if not available
  */
-export function handleOpponentInEdge(opponentPos, emptyPositions, boardSize = 3) {
+export function handleOpponentInEdge (opponentPos, emptyPositions, boardSize = 3) {
   if (!CONFIG.edges.includes(opponentPos)) {
-    return null;
+    return null
   }
 
-  const fila = Math.floor(opponentPos / boardSize);
-  const columna = opponentPos % boardSize;
+  const fila = Math.floor(opponentPos / boardSize)
+  const columna = opponentPos % boardSize
 
   // Check row positions (same row, different columns)
   for (let i = 0; i < boardSize; i++) {
-    const posFila = fila * boardSize + i;
+    const posFila = fila * boardSize + i
     if (emptyPositions.includes(posFila) && posFila !== opponentPos) {
-      return posFila;
+      return posFila
     }
   }
 
   // Check column positions (same column, different rows)
   for (let i = 0; i < boardSize; i++) {
-    const posColumna = i * boardSize + columna;
+    const posColumna = i * boardSize + columna
     if (emptyPositions.includes(posColumna) && posColumna !== opponentPos) {
-      return posColumna;
+      return posColumna
     }
   }
 
-  return null;
+  return null
 }
 
 /**
@@ -81,18 +81,18 @@ export function handleOpponentInEdge(opponentPos, emptyPositions, boardSize = 3)
  * @param {Array} emptyPositions - Available empty positions
  * @returns {number|null} Best strategic move or null if none available
  */
-export function getStrategicMove(opponentPos, emptyPositions) {
+export function getStrategicMove (opponentPos, emptyPositions) {
   // Try corner strategy first
-  const cornerMove = handleOpponentInCorner(opponentPos, emptyPositions);
+  const cornerMove = handleOpponentInCorner(opponentPos, emptyPositions)
   if (cornerMove !== null) {
-    return cornerMove;
+    return cornerMove
   }
 
   // Try center strategy
   if (opponentPos === CONFIG.center) {
-    return handleOpponentInCenter(emptyPositions);
+    return handleOpponentInCenter(emptyPositions)
   }
 
   // Try edge strategy
-  return handleOpponentInEdge(opponentPos, emptyPositions);
+  return handleOpponentInEdge(opponentPos, emptyPositions)
 }

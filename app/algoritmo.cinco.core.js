@@ -1,19 +1,18 @@
 // Algoritmo Ta-Te-Ti 5x5 Refactorizado con Inyección de Dependencias
 
-import { BOARD_CONFIGS, SYMBOLS } from './config.js';
+import { BOARD_CONFIGS } from './config.js'
 // Importaciones legacy removidas - usando algoritmo-base.js
-import { 
-  determinePlayerSymbols, 
-  findImmediateWin, 
-  findImmediateBlock, 
-  findStrategicCompletion, 
+import {
+  determinePlayerSymbols,
+  findImmediateWin,
+  findStrategicCompletion,
   selectPositionalMove,
   getOpponentPositions,
   verifyWinner
-} from './algoritmo-base.js';
-import { getStrategicMove5x5 } from './strategies/cinco-strategies.js';
+} from './algoritmo-base.js'
+import { getStrategicMove5x5 } from './strategies/cinco-strategies.js'
 
-const CONFIG = BOARD_CONFIGS.CINCO;
+const CONFIG = BOARD_CONFIGS.CINCO
 
 /**
  * Algoritmo principal refactorizado con inyección de dependencias
@@ -22,87 +21,116 @@ const CONFIG = BOARD_CONFIGS.CINCO;
  * @param {Object} dependencies - Dependencias inyectadas (opcional)
  * @returns {number} - Posición del movimiento
  */
-function algoritmoCincoRefactored(board, emptyPositions, dependencies = {}) {
+function algoritmoCincoRefactored (board, emptyPositions, dependencies = {}) {
   const {
     config = CONFIG,
-    verificarGanadorFn = verifyWinner,
     buscarMovimientoGanadorFn = findImmediateWin,
     buscarMovimientoCompletarFn = findStrategicCompletion,
     estrategiaPosicionalFn = selectPositionalMove,
     obtenerPosicionesOponenteFn = getOpponentPositions,
     determinarSimbolosFn = determinePlayerSymbols
-  } = dependencies;
+  } = dependencies
 
-  const vacias = emptyPositions.length;
-  const { miSimbolo, simboloOponente } = determinarSimbolosFn(vacias);
+  const vacias = emptyPositions.length
+  const { miSimbolo, simboloOponente } = determinarSimbolosFn(vacias)
 
   // Movimiento 1: Centro
   if (vacias === config.size) {
-    return config.center;
+    return config.center
   }
 
   // Movimiento 2: Centro o esquina
   if (vacias === config.size - 1) {
-    return estrategiaPosicionalFn(emptyPositions, config);
+    return estrategiaPosicionalFn(emptyPositions, config)
   }
 
   // Movimiento 3: Estrategia específica
   if (vacias === config.size - 2) {
     // Intentar ganar
-    const movimientoGanador = buscarMovimientoGanadorFn(board, emptyPositions, miSimbolo, config.winningCombinations);
+    const movimientoGanador = buscarMovimientoGanadorFn(
+      board,
+      emptyPositions,
+      miSimbolo,
+      config.winningCombinations
+    )
     if (movimientoGanador !== null) {
-      return movimientoGanador;
+      return movimientoGanador
     }
 
     // Bloquear oponente
-    const movimientoBloqueo = buscarMovimientoGanadorFn(board, emptyPositions, simboloOponente, config.winningCombinations);
+    const movimientoBloqueo = buscarMovimientoGanadorFn(
+      board,
+      emptyPositions,
+      simboloOponente,
+      config.winningCombinations
+    )
     if (movimientoBloqueo !== null) {
-      return movimientoBloqueo;
+      return movimientoBloqueo
     }
 
     // Estrategia posicional específica
-    const posicionesO = obtenerPosicionesOponenteFn(board, simboloOponente);
-    const posicionO = posicionesO[0];
+    const posicionesO = obtenerPosicionesOponenteFn(board, simboloOponente)
+    const posicionO = posicionesO[0]
 
-    const strategicMove = getStrategicMove5x5(posicionO, emptyPositions);
+    const strategicMove = getStrategicMove5x5(posicionO, emptyPositions)
     if (strategicMove !== null) {
-      return strategicMove;
+      return strategicMove
     }
 
-    return emptyPositions[0];
+    return emptyPositions[0]
   }
 
   // Movimientos 4+: Estrategia avanzada
   if (vacias <= config.size - 3) {
     // Intentar ganar
-    const movimientoGanador = buscarMovimientoGanadorFn(board, emptyPositions, miSimbolo, config.winningCombinations);
+    const movimientoGanador = buscarMovimientoGanadorFn(
+      board,
+      emptyPositions,
+      miSimbolo,
+      config.winningCombinations
+    )
     if (movimientoGanador !== null) {
-      return movimientoGanador;
+      return movimientoGanador
     }
 
     // Bloquear oponente
-    const movimientoBloqueo = buscarMovimientoGanadorFn(board, emptyPositions, simboloOponente, config.winningCombinations);
+    const movimientoBloqueo = buscarMovimientoGanadorFn(
+      board,
+      emptyPositions,
+      simboloOponente,
+      config.winningCombinations
+    )
     if (movimientoBloqueo !== null) {
-      return movimientoBloqueo;
+      return movimientoBloqueo
     }
 
     // Completar combinación propia
-    const movimientoCompletar = buscarMovimientoCompletarFn(board, emptyPositions, miSimbolo, config.winningCombinations);
+    const movimientoCompletar = buscarMovimientoCompletarFn(
+      board,
+      emptyPositions,
+      miSimbolo,
+      config.winningCombinations
+    )
     if (movimientoCompletar !== null) {
-      return movimientoCompletar;
+      return movimientoCompletar
     }
 
     // Bloquear combinación oponente
-    const movimientoBloquearCombinacion = buscarMovimientoCompletarFn(board, emptyPositions, simboloOponente, config.winningCombinations);
+    const movimientoBloquearCombinacion = buscarMovimientoCompletarFn(
+      board,
+      emptyPositions,
+      simboloOponente,
+      config.winningCombinations
+    )
     if (movimientoBloquearCombinacion !== null) {
-      return movimientoBloquearCombinacion;
+      return movimientoBloquearCombinacion
     }
 
     // Estrategia posicional
-    return estrategiaPosicionalFn(emptyPositions, config);
+    return estrategiaPosicionalFn(emptyPositions, config)
   }
 
-  return emptyPositions[0];
+  return emptyPositions[0]
 }
 
 // Re-export utility functions for testing
@@ -113,6 +141,6 @@ export {
   selectPositionalMove as estrategiaPosicional,
   getOpponentPositions as obtenerPosicionesOponente,
   determinePlayerSymbols as determinarSimbolos
-};
+}
 
-export default algoritmoCincoRefactored;
+export default algoritmoCincoRefactored
